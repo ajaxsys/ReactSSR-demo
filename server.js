@@ -1,16 +1,35 @@
-const express = require('express');
-const React = require('react');
-const ReactDOMServer = require('react-dom/server');
-const path = require('path');
-const App = require('./src/App').default;
+import express from 'express';
+import path from 'path';
+import fs from 'fs';
+import React from 'react';
+import ReactDOMServer from 'react-dom/server';
+import { StaticRouter } from 'react-router-dom/server';
+import App from './src/App';
 
 const app = express();
 
-// 提供打包后的静态文件
 app.use(express.static(path.resolve(__dirname, 'dist')));
 
 app.get('*', (req, res) => {
-  const appHtml = ReactDOMServer.renderToString(React.createElement(App));
+  const context = {};
+  
+  const appHtml = ReactDOMServer.renderToString(
+    <StaticRouter location={req.url} context={context}>
+      <App />
+    </StaticRouter>
+  );
+
+  // const indexFile = path.resolve(__dirname, 'dist', 'index.html');
+  // fs.readFile(indexFile, 'utf8', (err, data) => {
+  //   if (err) {
+  //     console.error('Error reading index.html', err);
+  //     return res.status(500).send('Some error happened');
+  //   }
+
+  //   return res.send(
+  //     data.replace('<div id="root"></div>', `<div id="root">${appHtml}</div>`)
+  //   );
+  // });
   const html = `
     <!DOCTYPE html>
     <html lang="en">
@@ -29,5 +48,5 @@ app.get('*', (req, res) => {
 });
 
 app.listen(3000, () => {
-  console.log('Server is running on http://localhost:3000');
+  console.log('Server is listening on port 3000');
 });

@@ -1,18 +1,11 @@
-import React, { useState } from 'react';
-import { hydrateRoot } from 'react-dom/client';
+import React from 'react';
+import ReactDOM from 'react-dom/client';
+import { BrowserRouter } from 'react-router-dom';
 import App from './App';
 
-function HydrationTest() {
-  const [clicked, setClicked] = useState(false);
-
-  return (
-    <div>
-      <App />
-      <button onClick={() => setClicked(!clicked)}>
-        {clicked ? 'Clicked!' : 'Click me'}
-      </button>
-    </div>
-  );
-}
-
-hydrateRoot(document.getElementById('root'), <HydrationTest />);
+const root = ReactDOM.createRoot(document.getElementById('root'));
+root.render(
+  <BrowserRouter>
+    <App />
+  </BrowserRouter>
+);
