@@ -1,7 +1,18 @@
-// src/index.js
-import React from 'react';
+import React, { useState } from 'react';
 import { hydrateRoot } from 'react-dom/client';
 import App from './App';
 
-// 使用 hydrateRoot 方法补水
-hydrateRoot(document.getElementById('root'), <App />);
+function HydrationTest() {
+  const [clicked, setClicked] = useState(false);
+
+  return (
+    <div>
+      <App />
+      <button onClick={() => setClicked(!clicked)}>
+        {clicked ? 'Clicked!' : 'Click me'}
+      </button>
+    </div>
+  );
+}
+
+hydrateRoot(document.getElementById('root'), <HydrationTest />);
