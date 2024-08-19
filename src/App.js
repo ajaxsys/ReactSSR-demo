@@ -8,6 +8,7 @@ function App() {
     <div>
       <nav>
         <Link to="/">Home</Link>
+        |
         <Link to="/blog/1">Blog 1</Link>
       </nav>
       <Routes>

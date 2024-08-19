@@ -1,7 +1,16 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 function Home() {
-  return <h1>Home Page</h1>;
+  const [clicked, setClicked] = useState(false);
+
+  return (
+    <div>
+      <h1>Home Page</h1>
+      <button onClick={() => setClicked(!clicked)}>
+        {clicked ? 'Clicked!' : 'Click me'}
+      </button>
+    </div>
+  );
 }
 
 export default Home;
