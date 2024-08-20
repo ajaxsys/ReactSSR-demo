@@ -3,7 +3,7 @@ import { Routes, Route, Link } from 'react-router-dom';
 import Home from './Home';
 import Blog from './Blog';
 
-function App() {
+function App({serverData}) {
   return (
     <div>
       <nav>
@@ -12,7 +12,7 @@ function App() {
         <Link to="/blog/1">Blog 1</Link>
       </nav>
       <Routes>
-        <Route path="/" element={<Home />} />
+        <Route path="/" element={<Home serverData={serverData} />} />
         <Route path="/blog/:id" element={<Blog />} />
       </Routes>
     </div>

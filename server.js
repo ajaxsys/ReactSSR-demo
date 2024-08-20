@@ -5,17 +5,19 @@ import React from 'react';
 import ReactDOMServer from 'react-dom/server';
 import { StaticRouter } from 'react-router-dom/server';
 import App from './src/App';
+import { fetchMockData } from './mockData'; // 导入 mock 数据函数
 
 const app = express();
 
 app.use(express.static(path.resolve(__dirname, 'dist')));
 
-app.get('*', (req, res) => {
+app.get('*', async (req, res) => {
+  const mockData = await fetchMockData(); // 使用 mock 数据函数
+
   const context = {};
-  
   const appHtml = ReactDOMServer.renderToString(
     <StaticRouter location={req.url} context={context}>
-      <App />
+      <App serverData={mockData} />
     </StaticRouter>
   );
 
@@ -40,6 +42,9 @@ app.get('*', (req, res) => {
     </head>
     <body>
         <div id="root">${appHtml}</div>
+        <script>
+          window.__INITIAL_DATA__ = ${JSON.stringify(mockData)};
+        </script>
         <script src="/bundle.js"></script>
     </body>
     </html>
