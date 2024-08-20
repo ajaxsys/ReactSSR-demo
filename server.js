@@ -38,6 +38,7 @@ app.get('*', async (req, res) => {
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="/styles.css"> <!-- 引入样式表 -->
         <title>React SSR</title>
     </head>
     <body>

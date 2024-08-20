@@ -2,6 +2,7 @@ import React from 'react';
 import { Routes, Route, Link } from 'react-router-dom';
 import Home from './Home';
 import Blog from './Blog';
+import './styles.css'; // 导入 CSS 文件
 
 function App({serverData}) {
   return (
